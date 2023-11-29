@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using System.Threading;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
 app.Run();
+
 
 class MyHub : Hub
 {
@@ -31,7 +34,15 @@ class MyHub : Hub
         while (true)
         {
             yield return DateTime.Now;
+            await SendMessage();
             await Task.Delay(1000, cancellationToken);
         }
+    }
+
+    public async Task SendMessage()
+    {
+
+            await Clients.All.SendAsync("ReceiveMessage", Guid.NewGuid());
+            await Task.Delay(1000);
     }
 }
