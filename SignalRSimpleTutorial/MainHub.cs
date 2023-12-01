@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRSimpleTutorial;
 
+[Authorize]
 public class MainHub : Hub<IMainHub>
 {
     public async IAsyncEnumerable<DateTime> Streaming(CancellationToken cancellationToken)

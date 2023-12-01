@@ -1,23 +1,15 @@
-﻿@page "/"
+﻿@page "/stream"
 @using Microsoft.AspNetCore.SignalR.Client
 
-<PageTitle>Home</PageTitle>
+<h3>SignalStream</h3>
 
-<h1>Full Duplex</h1>
-
-Welcome to your new app.
-
-<input type="text" @bind="message" />
-<button @onclick="SendMessage">Send</button>
-
-@foreach (var message in _messages)
+@foreach (var time in _time)
 {
-    <div>@message</div>
+    <div>@time</div>
 }
 
 @code
 {
-    private List<string> _messages = new();
     private List<string> _time = new();
     private HubConnection hubConnection;
     private string message;
@@ -31,22 +23,13 @@ Welcome to your new app.
             })
             .Build();
 
-        hubConnection.On<string>("ReceiveNotification", message =>
-        {
-            _messages.Add($"receive from server: {message}");
-            InvokeAsync(StateHasChanged);
-        });
-
         await hubConnection.StartAsync();
+
+        await foreach (var item in hubConnection.StreamAsync<DateTime>("Streaming"))
+        {
+            _time.Add(item.ToString());
+            InvokeAsync(StateHasChanged);
+        }
     }
 
-    public async Task SendMessage()
-    {
-        if (string.IsNullOrEmpty(message))
-        {
-            message = "empty";
-        }
-        await hubConnection.SendAsync("SendMessage", $"From blazor client: {message}");
-            message = string.Empty;
-    }
 }

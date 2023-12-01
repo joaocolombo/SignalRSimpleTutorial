@@ -19,5 +19,13 @@ namespace SignalRSimpleTutorial.Controllers
             await _hub.Clients.All.ReceiveNotification($"Hub Server Time {DateTime.Now}");
             return Ok();
         }
+
+
+        [HttpGet("triggerUser/{name}")]
+        public async Task<IActionResult> RunPushNotificationUser(string name)
+        {
+            await _hub.Clients.User(name).ReceiveNotification($"Just for {name} - {DateTime.Now}");
+            return Ok();
+        }
     }
 }
