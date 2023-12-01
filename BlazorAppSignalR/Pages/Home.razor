@@ -26,16 +26,15 @@ Welcome to your new app.
     private HubConnection hubConnection;
     private string message;
 
-
     protected override async Task OnInitializedAsync()
     {
         hubConnection = new HubConnectionBuilder()
             .WithUrl("https://localhost:7238/chat")
             .Build();
 
-        hubConnection.On<Guid>("ReceiveMessage", guid =>
+        hubConnection.On<string>("ReceiveNotification", message =>
         {
-            _messages.Add($"receive from server: {guid}");
+            _messages.Add($"receive from server: {message}");
             InvokeAsync(StateHasChanged);
         });
 

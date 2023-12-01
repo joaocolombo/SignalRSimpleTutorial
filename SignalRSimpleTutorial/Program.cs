@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.SignalR;
 using System.Threading;
 using Microsoft.AspNetCore.SignalR.Client;
+using SignalRSimpleTutorial;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
@@ -18,7 +18,7 @@ builder.Services.AddScoped(sp=>
 });
 
 var app = builder.Build();
-app.MapHub<MyHub>("chat");
+app.MapHub<MainHub>("chat");
 app.UseCors(pol => pol.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 if (app.Environment.IsDevelopment())
@@ -35,21 +35,3 @@ app.MapControllers();
 
 
 app.Run();
-
-
-public class MyHub : Hub
-{
-    public async IAsyncEnumerable<DateTime> Streaming(CancellationToken cancellationToken)
-    {
-        while (true)
-        {
-            yield return DateTime.Now;
-            await Task.Delay(1000, cancellationToken);
-        }
-    }
-
-    public async Task SendMessage(string message)
-    {
-        await Clients.All.SendAsync("ReceiveMessage", message);
-    }
-}

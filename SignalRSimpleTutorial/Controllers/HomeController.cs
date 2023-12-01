@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace SignalRSimpleTutorial.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HubConnection _hubConnection;
+        private readonly IHubContext<MainHub, IMainHub> _hub;
 
-        public HomeController(HubConnection hubConnection)
+        public HomeController(IHubContext<MainHub, IMainHub> hub)
         {
-            _hubConnection = hubConnection;
+            _hub = hub;
         }
 
-        [HttpGet("trigger")]
-        public async Task<IActionResult> RunPushNotification()
+        [HttpGet("triggerAll")]
+        public async Task<IActionResult> RunPushNotificationAll()
         {
-            await _hubConnection.SendAsync("SendMessage", Guid.NewGuid().ToString());
-            return new OkResult();
+            await _hub.Clients.All.ReceiveNotification($"Hub Server Time {DateTime.Now}");
+            return Ok();
         }
     }
 }
