@@ -48,8 +48,8 @@ public class MyHub : Hub
         }
     }
 
-    public async Task SendMessage(Guid guid)
+    public async Task SendMessage(string message)
     {
-        await Clients.All.SendAsync("ReceiveMessage", guid);
+        await Clients.All.SendAsync("ReceiveMessage", message);
     }
 }

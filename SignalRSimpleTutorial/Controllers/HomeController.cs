@@ -15,7 +15,7 @@ namespace SignalRSimpleTutorial.Controllers
         [HttpGet("trigger")]
         public async Task<IActionResult> RunPushNotification()
         {
-            await _hubConnection.SendAsync("SendMessage", Guid.NewGuid());
+            await _hubConnection.SendAsync("SendMessage", Guid.NewGuid().ToString());
             return new OkResult();
         }
     }

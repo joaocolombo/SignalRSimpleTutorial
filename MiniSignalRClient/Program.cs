@@ -9,10 +9,7 @@ await using var connection = new HubConnectionBuilder()
 await connection.StartAsync();
 
 
-connection.On<Guid>("ReceiveMessage", x =>
-{
-    Console.WriteLine(x);
-});
+connection.On<string>("ReceiveMessage", Console.WriteLine);
 
 
 await foreach (var item in connection.StreamAsync<DateTime>("Streaming"))
