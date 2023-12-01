@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRSimpleTutorial", "SignalRSimpleTutorial\SignalRSimpleTutorial.csproj", "{47A56B88-9EF7-40B5-9020-832D19C87916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRSimpleTutorial", "SignalRSimpleTutorial\SignalRSimpleTutorial.csproj", "{47A56B88-9EF7-40B5-9020-832D19C87916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSignalRClient", "MiniSignalRClient\MiniSignalRClient.csproj", "{13681366-DD9D-4CB4-9344-5BA9CC763DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniSignalRClient", "MiniSignalRClient\MiniSignalRClient.csproj", "{13681366-DD9D-4CB4-9344-5BA9CC763DBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppSignalR", "BlazorAppSignalR\BlazorAppSignalR.csproj", "{AAED4C4E-12C2-4A92-9504-D529C9E6754B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{13681366-DD9D-4CB4-9344-5BA9CC763DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13681366-DD9D-4CB4-9344-5BA9CC763DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13681366-DD9D-4CB4-9344-5BA9CC763DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAED4C4E-12C2-4A92-9504-D529C9E6754B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAED4C4E-12C2-4A92-9504-D529C9E6754B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAED4C4E-12C2-4A92-9504-D529C9E6754B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAED4C4E-12C2-4A92-9504-D529C9E6754B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

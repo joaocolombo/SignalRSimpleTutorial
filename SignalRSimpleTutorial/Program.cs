@@ -3,7 +3,7 @@ using System.Threading;
 using Microsoft.AspNetCore.SignalR.Client;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,7 +18,8 @@ builder.Services.AddScoped(sp=>
 });
 
 var app = builder.Build();
-app.MapHub<MyHub>("/chat");
+app.MapHub<MyHub>("chat");
+app.UseCors(pol => pol.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 if (app.Environment.IsDevelopment())
 {
@@ -50,6 +51,5 @@ public class MyHub : Hub
     public async Task SendMessage(Guid guid)
     {
         await Clients.All.SendAsync("ReceiveMessage", guid);
-        await Task.Delay(1000);
     }
 }

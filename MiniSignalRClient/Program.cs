@@ -21,7 +21,4 @@ await foreach (var item in connection.StreamAsync<DateTime>("Streaming"))
 }
 
 
-
-
-
 Console.ReadLine();
